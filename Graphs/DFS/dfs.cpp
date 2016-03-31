@@ -33,6 +33,8 @@ void dfs_visit(int node, int v, std::vector<std::list<int> > adj, std::vector<in
 			pred[*it] = node;
 			dfs_visit(*it, v, adj, color, pred, d, f);
 		}
+		else if (color[*it] == GRAY )
+			cout << "Aresta de retorno: ("<< node << ',' << *it << ")\n";
 	}
 	color[node] = BLACK;
 	tempo++;
@@ -74,6 +76,7 @@ int main(){
 	d.resize(v);
 	f.resize(v);
 	dfs(v, adj, color, pred, d,f);
+	cout << "v: d f \n";
 	for(int i = 0; i < v; i++){
 		cout << i << ": " << d[i] << " " << f[i] << "\n";
 	}	
