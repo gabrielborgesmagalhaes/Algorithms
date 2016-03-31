@@ -1,6 +1,7 @@
 #include <vector>
 #include <list>
 #include <iostream>
+#include <algorithm>
 #define WHITE 0
 #define GRAY 1
 #define BLACK 2
@@ -58,6 +59,22 @@ void dfs(int v, std::vector<std::list<int> > adj, std::vector<int> &color, std::
 	}
 }
 
+std::vector<std::list<int> > transpose(std::vector<std::list<int> > adj)
+{
+	std::vector<std::list<int> > t;
+	std::list<int>::iterator it;
+	int size = adj.size();
+	t.resize(size);
+	for(int i = 0; i < size ; i++)
+	{
+		for(it = adj[i].begin(); it != adj[i].end(); it++)
+			t[*it].push_back(i);
+	}
+	
+	return t;
+		
+}
+
 int main(){
 	int v, e;
 	cin >> v >> e;
@@ -79,7 +96,11 @@ int main(){
 	cout << "v: d f \n";
 	for(int i = 0; i < v; i++){
 		cout << i << ": " << d[i] << " " << f[i] << "\n";
-	}	
+	}
+	cout << "\n Lista de adjacencia do grafo de entrada:\n";
+	print_adj(adj);
+	cout << "\n  Lista de adjacencia do grafo de entrada transposto:\n";
+	print_adj(transpose(adj));
 	return 0;
 		
 }
